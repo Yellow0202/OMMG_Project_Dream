@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: item_gold_key
   displayName: "\uD669\uAE08 \uC5F4\uC1E0"
+  description: "\uB0A1\uC740 \uB9C8\uC744 \uC5B4\uB518\uAC00\uC5D0\uC11C \uBC1C\uACAC\uB41C
+    \uD669\uAE08\uBE5B \uC5F4\uC1E0. \uC7A0\uAE34 \uBB38\uC744 \uC5EC\uB294 \uB370
+    \uC4F0\uC77C \uAC83 \uAC19\uB2E4."
+  icon: {fileID: 21300000, guid: bee2e61c667f35e4b89ed0620a91d46f, type: 3}

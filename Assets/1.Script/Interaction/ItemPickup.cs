@@ -1,11 +1,12 @@
 using UnityEngine;
+using OMMG.Inventory;
 
 namespace OMMG.Interaction
 {
     /// <summary>
-    /// 상호작용 시 아이템을 "획득했다"는 사실만 알리는 컴포넌트.
-    /// 실제 인벤토리에 담는 처리는 이후 과제이며, 지금은 어떤 아이템인지(데이터)와
-    /// 획득/개방 상태만 다룬다.
+    /// 상호작용 시 아이템을 실제로 인벤토리에 넣어주는 컴포넌트.
+    /// consumeOnInteract가 true면 오브젝트가 사라지고(열쇠 등),
+    /// false면 자리에 남아 색상만 바뀜다(상자 등).
     /// </summary>
     public class ItemPickup : MonoBehaviour, IInteractable
     {
@@ -17,6 +18,9 @@ namespace OMMG.Interaction
 
         [Tooltip("상자처럼 자리에 남는 경우, 이미 연 상태를 표시하기 위한 색상")]
         [SerializeField] private Color openedTint = new Color(0.5f, 0.5f, 0.5f, 1f);
+
+        [Tooltip("획득 시 인벤토리에 들어갈 개수")]
+        [SerializeField, Min(1)] private int amount = 1;
 
         private bool isCollected;
 
@@ -31,6 +35,8 @@ namespace OMMG.Interaction
             }
 
             isCollected = true;
+
+            if (PlayerInventory.Instance != null) PlayerInventory.Instance.AddItem(item, amount);
 
             string label = item != null ? item.DisplayName : "알 수 없는 아이템";
             if (ItemGetPopup.Instance != null) ItemGetPopup.Instance.Show(label + "을(를) 획득했습니다!");
@@ -47,3 +53,4 @@ namespace OMMG.Interaction
         }
     }
 }
+

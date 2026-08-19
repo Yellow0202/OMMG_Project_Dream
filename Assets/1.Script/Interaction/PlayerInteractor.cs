@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using OMMG.Character;
+using OMMG.Inventory;
 
 namespace OMMG.Interaction
 {
@@ -65,6 +66,8 @@ namespace OMMG.Interaction
         /// <summary>상호작용 키 입력 시 실행되는 로직. 테스트 코드에서 직접 호출할 수도 있다.</summary>
         public void TryInteract()
         {
+            if (InventoryUI.Instance != null && InventoryUI.Instance.IsOpen) return; // 인벤토리가 열려있는 동안에는 상호작용 키 무시
+
             if (DialogueBox.Instance != null && DialogueBox.Instance.IsOpen)
             {
                 DialogueBox.Instance.AdvanceOrClose();
