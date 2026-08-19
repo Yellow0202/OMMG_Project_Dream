@@ -7,6 +7,7 @@ namespace OMMG.Core
     /// 세션 동안 유지되는 범용 스토리 플래그 저장소. 문자열 키 하나당 true/false 값 하나.
     /// 대화 선택, 아이템 획득, 이벤트 등 어떤 시스템이든 이 플래그를 읽고 써서
     /// "한 번 일어난 일이 이후 결과에 영향을 준다"를 표현할 수 있다.
+    /// 씬이 전환되어도(타이틀 <-> 인게임 등) 값이 유지되도록 DontDestroyOnLoad로 보존된다.
     /// </summary>
     public class GameFlags : MonoBehaviour
     {
@@ -16,7 +17,14 @@ namespace OMMG.Core
 
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         public bool Get(string key)
