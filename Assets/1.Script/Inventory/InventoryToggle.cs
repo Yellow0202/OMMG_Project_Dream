@@ -33,7 +33,7 @@ namespace OMMG.Inventory
         /// <summary>인벤토리 토글 키 입력 시 실행되는 로직. 테스트 코드에서 직접 호출할 수도 있다.</summary>
         public void TryToggle()
         {
-            if (DialogueBox.Instance != null && DialogueBox.Instance.IsOpen) return; // 대화 중엔 인벤토리 입력 무시
+            if (DialogueRunner.Instance != null && DialogueRunner.Instance.IsActive) return; // 대화 진행 중엔 인벤토리 입력 무시
 
             if (InventoryUI.Instance == null) return;
             InventoryUI.Instance.Toggle();
